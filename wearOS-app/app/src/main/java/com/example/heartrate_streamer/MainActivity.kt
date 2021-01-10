@@ -9,11 +9,17 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener2
 import android.hardware.SensorManager
+import android.opengl.Visibility
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
+import android.view.GestureDetector
+import android.view.GestureDetector.SimpleOnGestureListener
+import android.view.MotionEvent
+import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -39,6 +45,8 @@ class MainActivity : WearableActivity(), SensorEventListener2 {
     private lateinit var auth: FirebaseAuth;
     private lateinit var currentUser : FirebaseUser;
     private lateinit var database: DatabaseReference;
+    private lateinit var gestureDetector: GestureDetector;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -52,7 +60,21 @@ class MainActivity : WearableActivity(), SensorEventListener2 {
         mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
 
         auth = Firebase.auth;
+
+        // Long press to show/hide UI for energy saving.
+        mainScreen.setOnLongClickListener{
+            if(textBPM.visibility == View.VISIBLE)
+                Toast.makeText(this, "Long press to show UI again", Toast.LENGTH_LONG).show();
+
+            textBPM.visibility = if(textBPM.visibility == View.VISIBLE) View.GONE else View.VISIBLE;
+            textCode.visibility = if(textCode.visibility == View.VISIBLE) View.GONE else View.VISIBLE;
+            titleText.visibility = if(titleText.visibility == View.VISIBLE) View.GONE else View.VISIBLE;
+            true;
+        }
+
     }
+
+
 
     fun checkPermission(permission: String, requestCode: Int) {
         if (ContextCompat.checkSelfPermission(this@MainActivity, permission)
@@ -124,7 +146,7 @@ class MainActivity : WearableActivity(), SensorEventListener2 {
 
     override fun onPause() {
         super.onPause()
-
+        mSensorManager.unregisterListener(this);
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
@@ -164,7 +186,7 @@ class MainActivity : WearableActivity(), SensorEventListener2 {
 
     }
 
-    fun getBatteryPercentage(context: Context): Int {
+    private fun getBatteryPercentage(context: Context): Int {
         return if (Build.VERSION.SDK_INT >= 21) {
             val bm: BatteryManager =
                 context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
@@ -185,3 +207,5 @@ class MainActivity : WearableActivity(), SensorEventListener2 {
         }
     }
 }
+
+
