@@ -1,0 +1,30 @@
+.loginPage{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex: 1;
+    flex-direction: column;
+}
+
+.loginPanel{
+    width: 600px;
+    height: 400px;
+    padding: 10px;
+    text-align: center;    align-self: center;
+    justify-self:center;
+}
+
+.loginButtonCenter{
+    display: flex;
+    width: 100%;
+    align-content: center;
+    margin-top: 125px;
+    justify-content: center;
+}
+
+.signInButton{
+    margin: 0 auto;
+    text-align: center;
+}

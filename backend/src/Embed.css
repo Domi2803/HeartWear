@@ -1,0 +1,31 @@
+#heart{
+    position: fixed;
+    width: 480px;
+    height: 480px;
+    top: 0px;
+    left: 0px;
+}
+
+#heartrate{
+    position: fixed;
+    top: -75px;
+    width: 480px;
+    text-align: center;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    font-size: 180px;
+}
+#battery{
+    position: fixed;
+    top: 400px;
+    left: 0px;
+    height: 80px;
+}
+
+#offlineIcon{
+    position: fixed;
+    top: 140px;
+    left: 140px;
+    width: 200px;
+}
