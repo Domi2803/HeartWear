@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "HeartWear",
+  "name": "HeartWear Configuration Panel",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,5 +1,5 @@
 #heart{
-    position: fixed;
+    position: absolute;
     width: 480px;
     height: 480px;
     top: 0px;
@@ -7,7 +7,7 @@
 }
 
 #heartrate{
-    position: fixed;
+    position: absolute;
     top: -75px;
     width: 480px;
     text-align: center;
@@ -17,14 +17,14 @@
     font-size: 180px;
 }
 #battery{
-    position: fixed;
+    position: absolute;
     top: 400px;
     left: 0px;
     height: 80px;
 }
 
 #offlineIcon{
-    position: fixed;
+    position: absolute;
     top: 140px;
     left: 140px;
     width: 200px;

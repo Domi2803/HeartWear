@@ -1,30 +1,89 @@
 .loginPage{
     width: 100%;
-    height: 100vh;
+    margin-top: 50px;
+    margin-bottom: 50px;
     display: flex;
-    justify-content: center;
-    align-content: center;
     flex: 1;
     flex-direction: column;
 }
 
 .loginPanel{
-    width: 600px;
-    height: 400px;
-    padding: 10px;
-    text-align: center;    align-self: center;
+    position:relative;
+    width: 1000px;
+    height: 300px;
+    padding: 10px; 
+    align-self: center;
     justify-self:center;
+}
+
+@media (max-width: 1000px){
+    .loginPanel{
+        align-self: auto;
+    }
+
+    .logo{
+        width: 1000px;
+    }
 }
 
 .loginButtonCenter{
     display: flex;
     width: 100%;
     align-content: center;
-    margin-top: 125px;
+    margin-top: 60px;
     justify-content: center;
+}
+.downloadButtonCenter{
+    display: flex;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    margin-top: -25px;
+}
+
+.googlePlayButton{
+    margin: 0 auto;
+    width: 200px;
 }
 
 .signInButton{
     margin: 0 auto;
     text-align: center;
+    width: 250px;
+}
+
+.previewText{
+    position: absolute;
+    top: 0px;
+    left: 110px;
+    color: #727272;
+    font-size: 25px;
+    width: 350px;
+    text-align: center;
+}
+
+.previewBox{
+    position: absolute;
+    left: 80px;
+    top: 75px;
+    width: 350px;
+    height: 350px;
+    border-color: #727272;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 25px;
+
+    display: flex;
+    padding: 0px;
+    align-items: center;
+    justify-content: center;
+}
+
+.customizationText{
+    position: absolute;
+    top: 470px;
+    left: 35px;
+    width: 200px;
+    font-size: 24px;
+    color: #727272;
 }

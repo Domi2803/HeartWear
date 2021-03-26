@@ -1,0 +1,31 @@
+.panel{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 350px;
+    height: 60px;
+}
+
+.accountPicture{
+    position: absolute;
+    right: 60px;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
+
+.accountName{
+    line-height: 60px;
+    position: absolute;
+    right: 135px;
+    margin: 0;
+    font-size: 20px;
+}
+
+.logoutButton{
+    position: absolute;
+    height: 30px;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+}

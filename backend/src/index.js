@@ -6,7 +6,9 @@ import firebase from 'firebase/app';
 
 
 (async ()=>{
-  let config = {}
+  let config = {
+    
+  }
   const response = await fetch('/__/firebase/init.json')
   config = await response.json()
   firebase.initializeApp(config);

@@ -1,0 +1,9 @@
+.bar{
+    position: absolute;
+    top: 540px;
+    height: 270px;
+    width: calc(100% - 50px);
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}

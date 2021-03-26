@@ -2,17 +2,18 @@ import React, { Component } from 'react'
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
-import heart from './heart.png'
-import './Embed.css'
-import LowBatteryIcon from './battery_alert-24px.svg';
-import OfflineIcon from './cloud_off-24px.svg';
+
+import Preview from './Preview';
 
 export default class Embed extends Component {
 
     state={
         currentHR: 80,
         timestamp: 1610289382480,
-        batteryPercent: 15
+        batteryPercent: 15,
+        currentTheme: 2,
+        colorOverrideEnabled: false,
+        overrideColor: "#000000"
     }
 
     componentDidMount(){
@@ -21,7 +22,10 @@ export default class Embed extends Component {
             this.setState({
                 currentHR: Math.round(val.currentHR),
                 timestamp: val.lastUpdateTimestamp,
-                batteryPercent: val.currentBattery
+                batteryPercent: val.currentBattery,
+                currentTheme: val.currentTheme == null ? 2 : val.currentTheme,
+                colorOverrideEnabled: val.colorOverrideEnabled || false,
+                overrideColor: val.overrideColor || "#000000"
             });
         })
 
@@ -29,20 +33,8 @@ export default class Embed extends Component {
     }
 
     render() {
-        var timestampDiff = Date.now() - this.state.timestamp;
-        console.log(timestampDiff);
-        if(timestampDiff < 60000){
-            return (
-                <div>
-                    <img src={heart} id="heart" />
-                    <p id="heartrate">{this.state.currentHR}</p>
-                    {this.state.batteryPercent <= 15 ? <img id="battery" src={LowBatteryIcon} /> : null}
-                </div>
+        return(
+            <Preview currentHR={this.state.currentHR} timestamp={this.state.timestamp} batteryPercent={this.state.batteryPercent} theme={this.state.currentTheme} overrideEnabled={this.state.colorOverrideEnabled} overrideColor={this.state.overrideColor} />
             )
-        }else{
-            return (
-                <img src={OfflineIcon} id="offlineIcon" />
-            )
-        }
     }
 }
