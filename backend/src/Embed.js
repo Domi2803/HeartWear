@@ -11,7 +11,7 @@ export default class Embed extends Component {
         currentHR: 80,
         timestamp: 1610289382480,
         batteryPercent: 15,
-        currentTheme: 2,
+        currentTheme: 0,
         colorOverrideEnabled: false,
         overrideColor: "#000000"
     }
@@ -23,7 +23,7 @@ export default class Embed extends Component {
                 currentHR: Math.round(val.currentHR),
                 timestamp: val.lastUpdateTimestamp,
                 batteryPercent: val.currentBattery,
-                currentTheme: val.currentTheme == null ? 2 : val.currentTheme,
+                currentTheme: val.currentTheme == null ? 0 : val.currentTheme,
                 colorOverrideEnabled: val.colorOverrideEnabled || false,
                 overrideColor: val.overrideColor || "#000000"
             });
