@@ -13,6 +13,7 @@ import CustomizationBar from './CustomizationBar';
 import { colors } from '@material-ui/core';
 import {Battery} from '@pxblue/react-progress-icons';
 import URLTextField from './URLTextField';
+import LinkComponent from './LinkComponent';
 
 const Themes = {
     HeartShape: 0,
@@ -66,6 +67,7 @@ export default class LoggedIn extends Component {
                     <div style={{position: 'absolute', top: 90, right: 18}}><Battery percent={this.state.batteryPercent} size={54} color={'black'} labelPosition={'bottom'} labelColor='black' showPercentLabel={true}  /></div>
                     <h5 style={{position: 'absolute', top: 330, right: 20, textAlign: "right"}}>To use in OBS, create BrowserSource with the size 480x480 px and use the following URL:</h5>
                     <URLTextField url={"https://heartwear.web.app/" + firebase.auth().currentUser.uid} />
+                    <LinkComponent />
                 </Paper>
 
                 <CopyrightText />

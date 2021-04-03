@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest package="de.Domi2803.heartwear.BackgroundService" version="1.1.0" api-version="5.5" xmlns="http://tizen.org/ns/packages">
+    <profile name="wearable" />
+    <service-application appid="de.Domi2803.heartwear.BackgroundService" exec="HeartWearBackgroundService.dll" multiple="false" nodisplay="true" taskmanage="false" api-version="5.5" type="dotnet" auto-restart="false">
+        <label>HeartWearBackgroundService</label>
+        <icon>HeartWearBackgroundService.png</icon>
+        <background-category value="media" />
+        <background-category value="sensor" />
+        <splash-screens />
+    </service-application>
+    <shortcut-list />
+    <privileges>
+        <privilege>http://tizen.org/privilege/healthinfo</privilege>
+        <privilege>http://tizen.org/privilege/internet</privilege>
+        <privilege>http://tizen.org/privilege/network.get</privilege>
+        <privilege>http://tizen.org/privilege/display</privilege>
+    </privileges>
+    <dependencies />
+    <provides-appdefined-privileges />
+    <feature name="http://tizen.org/feature/sensor.heart_rate_monitor">true</feature>
+</manifest>

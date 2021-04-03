@@ -1,0 +1,28 @@
+﻿[*.cs]
+
+# CA1305: Specify IFormatProvider
+dotnet_diagnostic.CA1305.severity = none
+
+# CA1822: Member does not access instance data and can be marked as static (Shared in VisualBasic)
+dotnet_diagnostic.CA1822.severity = none
+
+# CA2007: Consider calling ConfigureAwait on the awaited task
+dotnet_diagnostic.CA2007.severity = none
+
+# CA2000: Objekte verwerfen, bevor Bereich verloren geht
+dotnet_diagnostic.CA2000.severity = none
+
+# IDE0003: Qualifizierung entfernen
+dotnet_style_qualification_for_event = false:none
+
+# IDE0003: Qualifizierung entfernen
+dotnet_style_qualification_for_field = false:none
+
+# IDE0003: Qualifizierung entfernen
+dotnet_style_qualification_for_method = false:none
+
+# IDE0003: Qualifizierung entfernen
+dotnet_style_qualification_for_property = false:none
+
+# CA1303: Literale nicht als lokalisierte Parameter übergeben
+dotnet_diagnostic.CA1303.severity = none

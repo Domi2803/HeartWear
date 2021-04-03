@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Xamarin.Forms Shell is a container to reduce the complexity of application development.
+    It is recommended to create a Shell application for navigation and performance improvements.
+    For more information about Shell, see https://developer.samsung.com/tizen/blog/en-us/2020/03/09/using-xamarinform-shell-on-galaxy-watch
+-->
+<Shell
+    x:Class="HeartWearTizen.AppShell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:res="clr-namespace:HeartWearTizen.Resources"
+    xmlns:views="clr-namespace:HeartWearTizen.Views"
+    FlyoutIsPresented="False"
+    FlyoutBehavior="Disabled"
+    >
+    <ShellContent Route="Main" ContentTemplate="{DataTemplate views:MainPage}"/>
+    <ShellContent Route="Streaming" ContentTemplate="{DataTemplate views:StreamingPage}"/>
+</Shell>

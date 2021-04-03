@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HeartWearTizen.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Tizen.Wearable.CircularUI.Forms;assembly=Tizen.Wearable.CircularUI.Forms"
+    xmlns:res="clr-namespace:HeartWearTizen.Resources">
+    <ContentPage.Content>
+        <StackLayout Padding="35,35,35,35">
+            <Label
+                Text="Welcome to HeartWear!"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" />
+            <Label
+                Text="Go to heartwear.web.app and link your watch with this code:"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" FontSize="Micro"/>
+            <Label
+                x:Name="linkCodeText"
+                Text="-"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" FontSize="Large"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

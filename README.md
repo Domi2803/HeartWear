@@ -4,7 +4,7 @@
 <a href="https://play.google.com/store/apps/details?id=de.domi2803.heartrate_streamer"><img width=200 src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" /></a>
 
  
-Heartwear is an app for wearOS Smartwatches that can be used to integrate the heart rate sensor of your watch into your livestreams. The app uses Google Firebase as backend and stream your heart rate to a website with a personalized embed link, which can be integrated into OBS or any compatible streaming software as a Browser Source.
+Heartwear is an app for wearOS and Tizen Smartwatches that can be used to integrate the heart rate sensor of your watch into your livestreams. The app uses Google Firebase as backend and stream your heart rate to a website with a personalized embed link, which can be integrated into OBS or any compatible streaming software as a Browser Source.
 
 ![demonstration picture](https://i.imgur.com/hhHYXAp.jpg)
 
