@@ -5,9 +5,7 @@
         <label>HeartWear</label>
         <icon>HeartWearTizen.png</icon>
         <metadata key="http://tizen.org/metadata/prefer_dotnet_aot" value="true" />
-        <splash-screens>
-            <splash-screen indicator-display="false" orientation="portrait" src="SplashScreen.png" type="img" />
-        </splash-screens>
+        <splash-screens />
     </ui-application>
     <shortcut-list />
     <privileges>

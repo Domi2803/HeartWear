@@ -18,6 +18,7 @@ namespace HeartWearTizen.Views
     {
         private string linkCode = "";
         private string authToken = null;
+        private bool running = true;
 
         public MainPage()
         {
@@ -44,7 +45,7 @@ namespace HeartWearTizen.Views
 
         private async void CheckTimer()
         {
-            while (true)
+            while (running)
             {
                 linkCodeText.Text = this.linkCode;
                 CheckLinkCodeStatus();
@@ -160,6 +161,7 @@ namespace HeartWearTizen.Views
 
         private async void GoToStreamingPage()
         {
+            running = false;
             Application.Current.MainPage = new StreamingPage();
         }
 

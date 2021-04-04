@@ -44,9 +44,17 @@ namespace HeartWearTizen.Views
         {
             InitializeComponent();
 
-            messagePort = new MessagePort("HeartWearUI", true);
-            messagePort.Listen();
-            messagePort.MessageReceived += MessagePort_MessageReceived;
+            try
+            {
+                messagePort = new MessagePort("HeartWearUI", true);
+                messagePort.Listen();
+                messagePort.MessageReceived += MessagePort_MessageReceived;
+            }
+            catch
+            {
+
+            }
+           
 
             appcontrol.ExtraData.Add("uid", Global.uid);
             appcontrol.ExtraData.Add("idToken", Global.idToken);
@@ -123,7 +131,8 @@ namespace HeartWearTizen.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-
+            messagePort?.Dispose();
+            messagePort?.StopListening();
         }
 
 
