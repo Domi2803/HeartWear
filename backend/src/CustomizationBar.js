@@ -4,6 +4,7 @@ import CustomizationItem from './CustomizationItem'
 import HeartShapePreview from './previewImages/previewHeartShape.png';
 import HeartLinePreview from './previewImages/previewHeartLine.png';
 import TextOnlyPreview from './previewImages/previewTextOnly.png';
+import GraphLinePreview from './previewImages/previewGraphLine.png';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 import {CompactPicker} from 'react-color';
 
@@ -14,6 +15,7 @@ export default class CustomizationBar extends Component {
                 <CustomizationItem selected={this.props.currentTheme == 1} previewImage={TextOnlyPreview} onSelected={()=>this.props.setTheme(1)}/> {/* Text Only */}
                 <CustomizationItem selected={this.props.currentTheme == 0} previewImage={HeartShapePreview} onSelected={()=>this.props.setTheme(0)}/> {/* Heart Shape */}
                 <CustomizationItem selected={this.props.currentTheme == 2} previewImage={HeartLinePreview} onSelected={()=>this.props.setTheme(2)}/> {/* Heart Line */}
+                <CustomizationItem selected={this.props.currentTheme == 3} previewImage={GraphLinePreview} onSelected={()=>this.props.setTheme(3)}/> {/* Graph */}
                 <div style={{position: "relative",
                 width: 250  ,
                 height: 180,
@@ -36,6 +38,29 @@ export default class CustomizationBar extends Component {
                     />
 
                     <div style={{marginTop: 30}}><CompactPicker color={this.props.overrideColor} onChange={(e)=>this.props.setOverrideColor(e.hex)} /></div>
+                </div>
+
+                <div style={{position: "relative",
+                width: 300  ,
+                height: 180,
+                margin: 5,
+                borderStyle: "solid",
+                borderRadius: 10,
+                borderWidth: 2,
+                borderColor: "#727272",userSelect: 'none'}}>
+                    <FormControlLabel
+                        control={
+                        <Checkbox
+                            checked={this.props.histogramEnabled}
+                            onChange={(ev)=>this.props.setHistogramEnabled(ev.target.checked)}
+                            color="primary"
+
+                        />
+                        }
+                        label="Enable Histogram"
+                        style={{marginTop: 10}}
+                    />
+
                 </div>
             </div>
         )

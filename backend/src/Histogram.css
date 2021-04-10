@@ -1,0 +1,63 @@
+.histogram{
+    position: absolute;
+    height: 60px;
+    width: 230px;
+    top: 0px;
+    left: 125px;
+}
+
+.histogram > p{
+    margin-block-start: 0px;
+    margin-block-end: 0px;;
+}
+
+.arrow{
+    position:absolute;
+    margin-top: 5px;
+}
+
+#lowarrow{
+    left: 115px;
+}
+
+#higharrow{
+    left: 0px;
+}
+
+#highvalue{
+    position: absolute;
+    left: 40px;
+    font-size:40px;
+    width: 75px;
+    text-align: center;
+}
+
+#lowvalue{
+    position: absolute;
+    left: 155px;
+    font-size:40px;
+    width: 75px;
+    text-align: center;
+}
+
+#layout0{
+    top: 0px;
+    left: 125px;
+}
+#layout1{
+    top: 305px;
+    left: 125px;
+}
+
+#layout2{
+    top: 305px;
+    left: 255px;
+}
+#layout3{
+    top: 305px;
+    left: 255px;
+}
+
+.axes{
+    opacity: 0;
+}
