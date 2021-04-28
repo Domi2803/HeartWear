@@ -59,7 +59,25 @@ Go to your firebase dashboard and create a new Android app. Fill out the form an
 
 Open the folder in Android Studio. You can edit the `activity_main.xml` so that it shows your url instead of mine. 
 
-Go to ``Gradle`` and select `Android -> Signing Report` and grab the SHA-1 and SHA-256 of the Debug Keystore that will be shown in the console. Go into your firebase console and add the hashes to your Android application. This is necessary so that Sign In with Google works properly.
+Go to ``Gradle`` and select `Android -> Signing Report` and grab the SHA-1 and SHA-256 of the Debug Keystore that will be shown in the console.
+
+
+If you don't have generated a Keystore before, type `keytool -alias "AndroidDebugKey" -genkeypair` in the Terminal of your Android Studio and give it a password.
+The rest of the fields after that don't matter so just press Enter.
+
+
+Go to your home directory (C:\Users\YOURNAME) and look for a file named .keystore.
+
+
+Rename .keystore to debug.keystore.
+
+
+Now copy and paste it to (C:\Users\YOURNAME\.android).
+
+
+Re-run the signReport task to generate a new key for the App.
+
+Go into your firebase console and add the hashes to your Android application. This is necessary so that Sign In with Google works properly.
 
 Now compile the app and you should be ready to go.
 
