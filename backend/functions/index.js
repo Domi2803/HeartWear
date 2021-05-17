@@ -78,6 +78,16 @@ exports.setLink = functions
 		var secret = fs.readFileSync("./private.key").toString();
 		var token = jwt.sign({ uid: uid }, secret);
 
+		var tokenReq = await admin
+			.database()
+			.ref("/linkCodes/" + linkCode)
+			.once("value");
+		var tokenVerify = tokenReq.val();
+
+        if(!tokenVerify){
+            throw new functions.https.HttpsError("not-found", "Link code not found");
+        }
+
 		await admin
 			.database()
 			.ref("/linkCodes/" + linkCode + "/token")
