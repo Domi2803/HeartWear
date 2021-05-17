@@ -21,10 +21,18 @@ namespace HeartWearBackgroundService
             messagePort.Listen();
             messagePort.MessageReceived += MessagePort_MessageReceived;
 
+            if(Preference.Contains("idToken"))
+                idToken = Preference.Get<string>("idToken");
+
+            if(Preference.Contains("uid"))
+                uid = Preference.Get<string>("uid");
+
 
             Power.RequestLock(PowerLock.Cpu, 0);
             RequestPermissionAndStart();
             _syncClient = new HeartWearSyncClient(uid, idToken);
+
+            
         }
 
         private void MessagePort_MessageReceived(object sender, MessageReceivedEventArgs e)
@@ -66,6 +74,7 @@ namespace HeartWearBackgroundService
             msgBundle.AddItem("currentbpm", currentHeartrate.ToString());
             try { messagePort?.Send(msgBundle, "de.Domi2803.heartwear.tizenapp", "HeartWearUI", true); } catch { }
             _syncClient.HrToSync = currentHeartrate;
+            Power.RequestLock(PowerLock.Cpu, 0);
         }
 
         protected override void OnAppControlReceived(AppControlReceivedEventArgs e)
@@ -75,6 +84,10 @@ namespace HeartWearBackgroundService
 
             uid = receivedAppControl.ExtraData.Get("uid").ToString();
             idToken = receivedAppControl.ExtraData.Get("idToken").ToString();
+
+            Preference.Set("uid", uid);
+            Preference.Set("idToken", idToken);
+
             _syncClient = new HeartWearSyncClient(uid, idToken);
 
             if (receivedAppControl.IsReplyRequest)
@@ -100,8 +113,7 @@ namespace HeartWearBackgroundService
         }
 
         protected override void OnLowMemory(LowMemoryEventArgs e)
-        {
-            base.OnLowMemory(e);
+        { 
         }
 
         protected override void OnRegionFormatChanged(RegionFormatChangedEventArgs e)

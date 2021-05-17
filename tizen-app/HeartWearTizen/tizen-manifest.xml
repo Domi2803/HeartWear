@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest package="de.Domi2803.heartwear.tizenapp" version="1.1.0" api-version="5.5" xmlns="http://tizen.org/ns/packages">
+<manifest package="de.Domi2803.heartwear.tizenapp" version="1.2.1" api-version="5.5" xmlns="http://tizen.org/ns/packages">
     <profile name="wearable" />
     <ui-application appid="de.Domi2803.heartwear.tizenapp" exec="HeartWearTizen.dll" multiple="false" nodisplay="false" taskmanage="true" type="dotnet" launch_mode="single">
         <label>HeartWear</label>

@@ -46,14 +46,16 @@ namespace HeartWearTizen.Services
         {
             try
             {
-                UpdateField("currentHR", this.hrToSync);
-                UpdateField("lastUpdateTimestamp", lastSyncTimestamp);
+                UpdateFields(this.hrToSync, lastSyncTimestamp, Tizen.System.Battery.Percent);
+                //UpdateField("currentHR", this.hrToSync);
+                //UpdateField("lastUpdateTimestamp", lastSyncTimestamp);
+                //UpdateField("deviceType", "\"tizen\"");
 
-                var battery = Tizen.System.Battery.Percent;
-                if (battery != previousBattery) {
-                    UpdateField("currentBattery", battery);
-                    previousBattery = battery;
-                }
+                //var battery = Tizen.System.Battery.Percent;
+                //if (battery != previousBattery) {
+                //    UpdateField("currentBattery", battery);
+                //    previousBattery = battery;
+                //}
             }
             catch
             {
@@ -63,15 +65,16 @@ namespace HeartWearTizen.Services
 
         
 
-        private void UpdateField(string fieldName, object value)
+        private void UpdateFields(byte currentHR, long lastSyncTimestamp, int battery)
         {
+
             ConnectionItem currentConnection = ConnectionManager.CurrentConnection;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(baseURL + this.userID + "/" + fieldName + ".json?auth=" + this.idToken);
-            request.Method = "PUT";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(baseURL + this.userID  + ".json?auth=" + this.idToken);
+            request.Method = "PATCH";
 
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
-                streamWriter.Write(value.ToString());
+                streamWriter.Write("{\"currentHR\": " + currentHR.ToString() + ", \"lastUpdateTimestamp\": " + lastSyncTimestamp.ToString() + ", \"deviceType\": \"tizen\", \"currentBattery\": " + battery.ToString() + "}");
             }
 
             // When a watch is paired with a mobile device, we can use WebProxy.
@@ -81,7 +84,13 @@ namespace HeartWearTizen.Services
                 WebProxy myproxy = new WebProxy(proxyAddr, true);
                 request.Proxy = myproxy;
             }
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            }catch(Exception e)
+            {
+                
+            }
         }
     }
 }

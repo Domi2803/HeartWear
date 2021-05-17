@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest package="de.Domi2803.heartwear.BackgroundService" version="1.1.0" api-version="5.5" xmlns="http://tizen.org/ns/packages">
+<manifest package="de.Domi2803.heartwear.BackgroundService" version="1.2.1" api-version="5.5" xmlns="http://tizen.org/ns/packages">
     <profile name="wearable" />
-    <service-application appid="de.Domi2803.heartwear.BackgroundService" exec="HeartWearBackgroundService.dll" multiple="false" nodisplay="true" taskmanage="false" api-version="5.5" type="dotnet" auto-restart="false">
+    <service-application appid="de.Domi2803.heartwear.BackgroundService" exec="HeartWearBackgroundService.dll" multiple="false" nodisplay="true" taskmanage="false" api-version="5.5" type="dotnet" auto-restart="true">
         <label>HeartWearBackgroundService</label>
         <icon>HeartWearBackgroundService.png</icon>
         <background-category value="media" />
         <background-category value="sensor" />
+        <background-category value="background-network" />
+        <background-category value="location" />
         <splash-screens />
     </service-application>
     <shortcut-list />
