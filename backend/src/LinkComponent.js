@@ -24,6 +24,11 @@ export default class LinkComponent extends Component {
                 }}
 			>
 				<InputLabel htmlFor="embedurl">Link Code</InputLabel>
+                <form onSubmit={(e)=>{
+                    e.preventDefault();
+                    this.performLink();
+                    return false;
+                }}>
 
 				<FilledInput
 					id="embedurl"
@@ -42,6 +47,7 @@ export default class LinkComponent extends Component {
 						</InputAdornment>
 					}
                     />
+                    </form>
 			</FormControl></div>
         )
     }
