@@ -24,23 +24,24 @@ export default class LinkComponent extends Component {
                 }}
 			>
 				<InputLabel htmlFor="embedurl">Link Code</InputLabel>
+
 				<FilledInput
 					id="embedurl"
 					type="text"
 					value={this.state.linkCode}
                     onChange={this.onChange}
 					endAdornment={
-						<InputAdornment position="end">
+                        <InputAdornment position="end">
 							<IconButton
 								aria-label="copy url"
 								onClick={this.performLink}
 								edge="end"
-							>
+                                >
 							    <LinkOutlinedIcon />
 							</IconButton>
 						</InputAdornment>
 					}
-				/>
+                    />
 			</FormControl></div>
         )
     }
@@ -51,12 +52,15 @@ export default class LinkComponent extends Component {
     }
 
     performLink = () =>{
-        console.log(firebase.auth().currentUser.uid);
+        if(this.state.linkCode.length != 4){
+            alert("Error: Invalid link code");
+            return;
+        }
+
         firebase.app().functions("europe-west1").httpsCallable("setLink")({linkCode: this.state.linkCode}).then((r)=>{
             alert("Successfully linked your watch!");
         }).catch((e)=>{
-            alert("An error occured while linking your watch. Please try again later.");
-            console.error(e);
+            alert(e);
         });
     }
 }
