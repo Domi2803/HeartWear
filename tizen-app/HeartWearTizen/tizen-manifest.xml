@@ -5,6 +5,9 @@
         <label>HeartWear</label>
         <icon>HeartWearTizen.png</icon>
         <metadata key="http://tizen.org/metadata/prefer_dotnet_aot" value="true" />
+        <background-category value="sensor" />
+        <background-category value="background-network" />
+        <background-category value="iot-communication" />
         <splash-screens />
     </ui-application>
     <shortcut-list />
@@ -13,7 +16,6 @@
         <privilege>http://tizen.org/privilege/network.get</privilege>
         <privilege>http://tizen.org/privilege/healthinfo</privilege>
         <privilege>http://tizen.org/privilege/display</privilege>
-        <privilege>http://tizen.org/privilege/appmanager.launch</privilege>
     </privileges>
     <dependencies />
     <provides-appdefined-privileges />

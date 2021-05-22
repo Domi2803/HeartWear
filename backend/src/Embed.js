@@ -18,9 +18,16 @@ export default class Embed extends Component {
     }
 
     componentDidMount(){
+        this.createLink();
+        
+
+        setInterval(()=>{this.forceUpdate(); this.createLink();}, 10000);
+    }
+
+    createLink = () => {
         firebase.database().ref("/" + this.props.uid + "/").on('value', snapshot=>{
             var val = snapshot.val();
-            
+            console.log(val);
             if(val.currentHR > 1){
                 this.setState({
                     currentHR: Math.round(val.currentHR),
@@ -33,8 +40,6 @@ export default class Embed extends Component {
                 });
             }
         })
-
-        setInterval(()=>{this.forceUpdate()}, 10000);
     }
 
     render() {

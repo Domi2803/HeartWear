@@ -38,7 +38,7 @@ namespace HeartWearTizen.Services
                 _sensor.PausePolicy = SensorPausePolicy.None;
 
                 // TODO: Set the update interval in milliseconds
-                 _sensor.Interval = 1000;
+                 _sensor.Interval = 3000;
             }
             catch (NotSupportedException)
             {

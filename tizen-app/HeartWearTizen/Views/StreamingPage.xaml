@@ -7,11 +7,14 @@
     xmlns:res="clr-namespace:HeartWearTizen.Resources">
     <ContentPage.Content>
         <StackLayout Padding="35,35,35,35" VerticalOptions="FillAndExpand">
+            <Button x:Name="logout" Text="Re-Link"  VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Small" />
+            
             <Label
                 x:Name="urltext"
-                Text="go to heartwear.web.app"
+                Text="to configure, go to heartwear.web.app"
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="Start"
+                Margin="0,10,0,0"
                 FontSize="Micro"/>
             
             <Label x:Name="bpmtext"
@@ -21,6 +24,7 @@
             
             
             <Button x:Name="button" Text="Start"  VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" />
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

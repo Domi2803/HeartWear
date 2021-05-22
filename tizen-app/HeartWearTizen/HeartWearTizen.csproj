@@ -31,8 +31,4 @@
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HeartWearBackgroundService\HeartWearBackgroundService.csproj" />
-  </ItemGroup>
-
 </Project>

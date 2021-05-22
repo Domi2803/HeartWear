@@ -16,130 +16,97 @@ namespace HeartWearTizen.Views
     public static class Global
     {
         public static bool streamingPage = false;
-        public static bool svcActive = false;
         public static string idToken = "";
         public static string uid = "";
     }
     public partial class StreamingPage : ContentPage
     {
         static MessagePort messagePort;
-        
-        public bool SvcActive
-        {
-            get { return Global.svcActive; }
-            set
-            {
-                Global.svcActive = value;
-                updateButton();
-            }
-        }
 
-        AppControl appcontrol = new AppControl
-        {
-            ApplicationId = "de.Domi2803.heartwear.BackgroundService",
-            Operation = AppControlOperations.Default
-        };
+        private HeartRateMonitorService _hrService;
+        private HeartWearSyncClient _syncClient;
+        private bool active;
 
         public StreamingPage()
         {
             InitializeComponent();
 
-            try
-            {
-                messagePort = new MessagePort("HeartWearUI", true);
-                messagePort.Listen();
-                messagePort.MessageReceived += MessagePort_MessageReceived;
-            }
-            catch
-            {
-
-            }
-           
-
-            appcontrol.ExtraData.Add("uid", Global.uid);
-            appcontrol.ExtraData.Add("idToken", Global.idToken);
-
             button.On<Xamarin.Forms.PlatformConfiguration.Tizen>().SetStyle(ButtonStyle.Bottom);
             button.Clicked += Button_Clicked;
 
+
+            logout.Clicked += Logout_Clicked; 
+
             bpmtext.Text = "- bpm";
 
-        }
-
-        private void Launch()
-        {
-            AppControl.SendLaunchRequest(appcontrol, (launchRequest, replyRequest, result) =>
-            {
-                switch (result)
-                {
-                    case AppControlReplyResult.Succeeded:
-                        bpmtext.Text = "- bpm";
-                        break;
-                    case AppControlReplyResult.Failed:
-                        bpmtext.Text = "Failed";
-                        SvcActive = false;
-                        break;
-                    case AppControlReplyResult.AppStarted:
-                        bpmtext.Text = "- bpm";
-                        break;
-                    case AppControlReplyResult.Canceled:
-                        bpmtext.Text = "- bpm";
-                        SvcActive = false;
-                        break;
-                }
-            });
+            
+            
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            if (SvcActive)
+            active = !active;
+            button.Text = active ? "Stop" : "Start";
+
+            if (active)
             {
-                var bundleToSend = new Bundle();
-                bundleToSend.AddItem("type", "exit");
-                try
-                {
-                    messagePort?.Send(bundleToSend, "de.Domi2803.heartwear.BackgroundService", "HeartWearSvc", false);
-                }
-                catch { }
-                SvcActive = false;
+                Power.RequestLock(PowerLock.Cpu, 0);
+                Power.RequestLock(PowerLock.DisplayNormal, 0);
+                _syncClient = new HeartWearSyncClient(Global.uid, Global.idToken);
+                RequestPermissionAndStart();
             }
             else
             {
-                try
-                {
-                    Launch();
-                }catch
-                {
-
-                }
+                Power.ReleaseLock(PowerLock.Cpu);
+                Power.ReleaseLock(PowerLock.DisplayNormal);
+                _syncClient = null;
             }
         }
 
-        private void updateButton()
+        private async void RequestPermissionAndStart()
         {
-            button.Text = Global.svcActive ? "Stop" : "Start";
+            var response = await PrivacyPermissionService.RequestAsync(PrivacyPrivilege.HealthInfo);
+            if (response == PrivacyPermissionStatus.Granted)
+            {
+                _hrService = new HeartRateMonitorService();
+                _hrService.Start();
+                _hrService.onUpdate += _hrService_onUpdate;
+            }
+        }
+
+        private void _hrService_onUpdate(byte currentHeartrate)
+        {
+            if(_syncClient != null)
+                _syncClient.HrToSync = currentHeartrate;
+            if(currentHeartrate != 0)
+            {
+                bpmtext.Text = currentHeartrate + " bpm";
+                
+            }
+        }
+
+        private void Logout_Clicked(object sender, EventArgs e)
+        {
+            Global.idToken = null;
+            Global.uid = null;
+            _syncClient = null;
+            if(Xamarin.Forms.Application.Current.Properties.ContainsKey("linkCode"))
+            Xamarin.Forms.Application.Current.Properties.Remove("linkCode");
+            if (Xamarin.Forms.Application.Current.Properties.ContainsKey("authToken"))
+                Xamarin.Forms.Application.Current.Properties.Remove("authToken");
+            Xamarin.Forms.Application.Current.MainPage = new MainPage();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            Console.WriteLine("OnAppearing");
         }
 
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            messagePort?.Dispose();
-            messagePort?.StopListening();
         }
 
-
-        private void MessagePort_MessageReceived(object sender, MessageReceivedEventArgs e)
-        {
-            SvcActive = true;
-            bpmtext.Text = e.Message.GetItem("currentbpm").ToString() + "bpm";
-        }
     }
 }

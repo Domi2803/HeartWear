@@ -45,7 +45,7 @@ export default class Preview extends Component {
 					userSelect: "none",
 				}}
 			>
-				{timestampDiff < 60000 ? (
+				{timestampDiff < 300000 ? (
 					this.display(
 						this.props.theme,
 						this.props.overrideEnabled,

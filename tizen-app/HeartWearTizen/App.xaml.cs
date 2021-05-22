@@ -26,10 +26,7 @@ namespace HeartWearTizen
         protected override void OnSleep()
         {
             // Handle when your app sleeps
-            if (!Global.svcActive && Global.streamingPage)
-            {
-                this.Quit();
-            }
+            
         }
 
         protected override void OnResume()

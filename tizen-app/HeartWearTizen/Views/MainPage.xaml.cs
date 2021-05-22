@@ -30,6 +30,7 @@ namespace HeartWearTizen.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            running = true;
 
             if (Application.Current.Properties.ContainsKey("linkCode"))
                 linkCode = Application.Current.Properties["linkCode"].ToString();
@@ -137,7 +138,6 @@ namespace HeartWearTizen.Views
                 return;
             }
 
-            Console.WriteLine("lulw1 " + response.StatusCode);
             if(response.StatusCode == HttpStatusCode.OK)
             {
                 var streamReader = new StreamReader(response.GetResponseStream());
@@ -148,13 +148,10 @@ namespace HeartWearTizen.Views
                 linkCodeText.Text = "Logged In";
 
 
-                Console.WriteLine("lulw2 " + body);
 
                 LoginResponse obj = JsonConvert.DeserializeObject<LoginResponse>(body);
-                Console.WriteLine("lulw3 " + obj.ToString());
                 Global.idToken = obj.idToken;
                 Global.uid = obj.uid;
-                Console.WriteLine("lulw4 " + obj.ToString());
                 GoToStreamingPage();
             }
         }
